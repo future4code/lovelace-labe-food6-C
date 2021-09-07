@@ -12,8 +12,9 @@ const GlobalState = (props) =>{
 
 
 	const listaDeRestaurantes = ()=>{
-		axios.get(url, headers).then(res=>{
-			console.log(res.data)
+		axios.get(`${url}/restaurants`, headers).then(res=>{
+			console.log(res.data.restaurants)
+			setRestaurantes(res.data.restaurants)
 		}).catch(err=>{
 			alert('Algo deu errado!\n'+err.response)
 		})
