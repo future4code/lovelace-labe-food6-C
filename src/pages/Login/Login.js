@@ -2,9 +2,9 @@ import React, {useState, useEffect, useRef} from 'react'
 import {url} from '../../constants/urls'
 import axios from 'axios'
 import {useHistory, Link} from 'react-router-dom'
-import Logo from '../../img/logo-future-eats-invert_2021-09-06/logo-future-eats-invert.png'
-import OlhoAberto from '../../img/senha-2_2021-09-06/senha-2.png'
-import OlhoFechado from '../../img/senha-2_2021-09-06/senha.png'
+import Logo from '../../img/logo-future-eats-invert.png'
+import OlhoAberto from '../../img/senha-2.png'
+import OlhoFechado from '../../img/senha.png'
 
 
 
@@ -38,7 +38,7 @@ const Login = ()=>{
 			localStorage.setItem('token', res.data.token)
 			history.push('/feed')
 		}).catch(err=>{
-			alert('Algo deu errado!\n'+err.response)
+			alert('Algo deu errado!\n'+err.response.data.message)
 		})
 	}
 

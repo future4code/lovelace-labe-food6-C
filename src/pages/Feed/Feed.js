@@ -1,62 +1,107 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect, useContext, useRef} from 'react'
 import {useHistory} from 'react-router-dom'
 import Context from '../../global/Context'
-import styled from 'styled-components'
+import {Container, Categorias, Categoria,
+Restaurantes} from './styled'
+import RestaurantCard from '../../components/RestaurantCard'
+import Footer from '../../components/Footer'
 
 
-const Card = styled.div`
-	border: 1px solid;
-	width: 29.3vw;
-	margin: 20px;
-`
-const Image = styled.img`
-	width: 300px;
-	height: 150px;
-`
-const Nome = styled.div`
-	
-`
-const Tempo = styled.div`
-	display: flex;
-	justify-content: space-between;
-`
-const Texto = styled.div`
-	margin: 15px;
-`
-
-
-
-
-const Feed = ()=>{
+//Componente funcional-----------------------
+const Feed = (props)=>{
+	const card = useRef(null)
 	const history = useHistory()
-	const {requests, states} = useContext(Context)
+	const {requests, states, setters} = useContext(Context)
 	const restaurantes = states.restaurantes
+	const [restaurante, setRestaurante] = useState('')
+	const [busca, setBusca] = useState([])
+
+	
+
 
 	useEffect(()=>{
 		const token = localStorage.getItem('token')
-
 		if(token === null){
 			alert('Página inacessível!\nVocê não está logado.')
 			history.push('/login')
 		}
-
 		requests.listaDeRestaurantes()
-
 	}, [])
 
-	return<>
-			{restaurantes.length > 0 ? restaurantes.map(restaurante=>{
-				return <Card key={restaurante.id}>
-						<Image src={restaurante.logoUrl}/>
-						<Texto><Nome>{restaurante.name}</Nome>
-						   <Tempo>{restaurante.deliveryTime} - {restaurante.deliveryTime + 10} min
-						   <div>Frete R$ {restaurante.shipping},00</div></Tempo>
-						</Texto>
-					   </Card>
+
+	const onChange = (e)=>{
+		setRestaurante(e.target.value)
+	}
+//--------Buscar restaurante-------------------------------
+	const buscarRest = (e)=>{
+		e.preventDefault()
+
+		const achado = restaurantes
+		.filter(rest=> rest.name.toLowerCase() === 
+			restaurante.toLowerCase())
+		setBusca(achado)
+		if(busca.length === 0){
+			card.current.style.display = 'block'			
+		}else{
+			card.current.style.display = 'none'
+		}
+	}
+//--------------Filtro de categoria-------------------------
+	const filtrarCategoria = (categoria)=>{
+		const filtro = restaurantes.filter((rest)=> rest.category === categoria)
+		setBusca(filtro)
+		if(busca.length === 0){
+			card.current.style.display = 'block'			
+		}else{
+			card.current.style.display = 'none'
+		}
+	}
+
+	
+
+	
+
+//---Início da renderização-----------------------------------
+	return<Container>
+			<form onSubmit={buscarRest}>
+			<input type='text' placeholder='Restaurante'
+			value={restaurante} onChange={onChange}
+			autoFocus /><button>Buscar</button>
+			</form>
+			<Categorias>
+			{restaurantes.map(rest=>{
+				return <Categoria onClick={()=> filtrarCategoria(rest.category)}>
+							{rest.category}
+					   </Categoria>
+			})}</Categorias>
+{/*----------Resultado da busca-------------------------------*/}
+			{busca.map(item=>{
+				return <RestaurantCard
+						key={item.id}
+						img={item.logoUrl}
+						id={item.id}
+						nome={item.name}
+						entrega={item.deliveryTime}
+						frete={item.shipping} />						
+			})}
+
+{/*-----------Lista de restaurantes--------------------------------*/}
+			<Restaurantes ref={card}>
+			{restaurantes.length > 0 ?
+			 restaurantes.map(restaurante=>{
+				return <RestaurantCard key={restaurante.id}
+						img={restaurante.logoUrl}
+						nome={restaurante.name}
+						id={restaurante.id}
+						entrega={restaurante.deliveryTime}
+						frete={restaurante.shipping}
+					   />
 			}) : <div class='loadContainer'>
-					<div class='carregando'></div>
+					<div class='loading'>
+					</div>
 				 </div>}
-			
-		  </>
+				 </Restaurantes>
+				 <Footer/>				 	
+		  </Container>
 }
 export default Feed

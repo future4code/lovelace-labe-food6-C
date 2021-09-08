@@ -6,6 +6,9 @@ import Feed from '../pages/Feed/Feed'
 import Signup from '../pages/Signup/Signup'
 import Address from '../pages/Address/Address'
 import Home from '../pages/Home/Home'
+import Cardapio from '../pages/Cardapio/Cardapio'
+import Perfil from '../pages/Perfil/Perfil'
+
 
 const Routes = ()=>{
 	return<Switch>
@@ -25,6 +28,12 @@ const Routes = ()=>{
 				<Route exact path='/feed'>
 					<Feed />
 				</Route>
+				<Route exact path='/cardapio'>
+					<Cardapio/>
+				</Route>
+				<Route exact path='/perfil'>
+					<Perfil/>
+				</Route>				
 			</GlobalState>
 		  </Switch>
 }
