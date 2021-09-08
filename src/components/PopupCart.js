@@ -1,37 +1,43 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useContext} from 'react'
 import styled from 'styled-components'
+import Context from '../global/Context'
 
 
-
+const Popup = styled.div`
+	position: fixed;	
+	background-color: whitesmoke;
+	box-shadow: 3px 3px 7px black;
+	border: 1px solid;
+	width: 80vw;
+	height: 30vh;
+	border-radius: 20px;
+	text-align: center;
+	padding: 10px;
+	div{
+		margin: 10px;
+	}
+	
+`
+const Rodape = styled.div`
+	float: right;
+	color: blue;
+`
 
 
 const PopupCart = (props)=>{
-	const [produto, setProduto] = useState([])
-	const [pagamento, setPagamento] = useState('')
-
-
-	const mudaProduto = (e)=>{
-		setProduto(e.target.value)
-	}
-
-	const mudaPagamento = (e)=>{
-		setPagamento(e.target.value)
-	}
+	const {states, setters} = useContext(Context)
+	const pratos = states.cardapio.products
+	
 
 
 	return<Popup>
-			<div>Informe o método de pagamento a quantidade desejada</div>
-			<select value={pagamento} onChange={mudaPagamento}>
-				<option>Débito</option>
-				<option>Crédito</option>
-				<option>Paypal</option>
-				<option>Boleto</option>
-				<option>Pix</option>
-			</select>
-			<input type='number' value={produto}
-			onChange={mudaProduto} />
-			<p onClick={()=> props.adiciona(props.id)} >
-			Adicionar ao carrinho</p>
-		</Popup>
+			<div>Informe a quantidade desejada</div>								
+			<input type='number' value={states.produto}
+			min='0' max='10' onChange={setters.mudaProduto} />
+			<Rodape>
+			<span onClick={()=> setters.adicionarAoCarro(props.id, states.produto)} >
+				Adicionar ao carrinho</span>
+			</Rodape>
+		  </Popup>
 }
 export default PopupCart

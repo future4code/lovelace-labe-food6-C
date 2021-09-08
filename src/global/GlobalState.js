@@ -8,10 +8,55 @@ import {useHistory} from 'react-router-dom'
 
 const GlobalState = (props) =>{
 	const history = useHistory()
+	const container = useRef(null)
+	const [mostrar, setMostrar] = useState(false)
+	const [idProduto, setIdProduto] = useState('')
 	const [restaurantes, setRestaurantes] = useState([])
 	const [cardapio, setCardapio] = useState([])
 	const [perfil, setPerfil] = useState([])
-	console.log(cardapio)
+	const [produto, setProduto] = useState('')
+	const [carro, setCarro] = useState([{
+		id:'',
+		qnt:''
+	}])
+	console.log(carro)
+
+	const adicionar = (id)=>{
+		setIdProduto(id)
+		setMostrar(true)
+
+	}
+
+	const voltar = ()=>{
+		setMostrar(false)
+		container.current.style.background='whitesmoke'
+	}
+
+
+	const mudaProduto = (e)=>{
+		setProduto(e.target.value)
+	}
+
+
+	
+	const adicionarAoCarro = (id, quantidade)=>{
+		const itemDoCarro = carro.find((item)=> id === item.id)
+		if(itemDoCarro){
+			const novoCarro = carro.map(item=>{
+				if(id === item.id){
+					return{...item, id: id, qnt: Number(item.qnt) + Number(quantidade)}	
+				}
+				return item 
+			})
+			setCarro(novoCarro)
+		}else{
+			const itemNoCarro = carro.find((item)=> id === item.id)
+
+			const novoCarro = [...carro, {...itemNoCarro, id: id, qnt: Number(quantidade)+Number(quantidade)}]
+			setCarro(novoCarro)
+		}
+		voltar()
+	}
 	
 
 
@@ -44,16 +89,14 @@ const GlobalState = (props) =>{
 	}
 
 
-	const adicionarAoCarro = (id)=>{
-		console.log(id)
-	}	
-
+	
 	
 
-	const states = {restaurantes, cardapio, perfil}
-	const setters = {}
+	const states = {restaurantes, cardapio, perfil, carro, produto, mostrar,
+		idProduto, container}
+	const setters = {adicionarAoCarro, mudaProduto, adicionar}
 	const requests = {listaDeRestaurantes, detalhesRest,
-		pegarPerfil, adicionarAoCarro}
+		pegarPerfil}
 	
 	return<Context.Provider value={{states, setters, requests}}>
 		  	{props.children}

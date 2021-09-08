@@ -44,24 +44,4 @@ export const Picture = styled.img`
 	height: 130px;	
 	border-radius: 10px;
 `
-export const Popup = styled.div`
-	position: absolute;
-	left: -85vw;	
-	background-color: whitesmoke;
-	box-shadow: 3px 3px 7px black;
-	border: 1px solid;
-	width: 80vw;
-	height: 30vh;
-	border-radius: 20px;
-	text-align: center;
-	padding: 10px;
-	div{
-		margin: 10px;
-	}
-	
-`
-export const Rodape = styled.div`
-	display: flex;
-	justify-content: space-between;
-	color: blue;
-`
+
