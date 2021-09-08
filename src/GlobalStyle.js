@@ -1,11 +1,27 @@
 import {createGlobalStyle} from 'styled-components'
-import Logo from './img/logo-future-eats-invert_2021-09-06/logo-future-eats-invert.png'
+import Logo from './img/logo-future-eats-invert.png'
 
 const GlobalStyle = createGlobalStyle`
   .olho{
   	position: absolute;
-  	left: 16.5vw;
+  	left: 44.4vw;
   }
+
+  .loading{
+    border: 2px solid lightgray;
+    width: 50px;
+    height: 50px;
+    border-top-color: red;
+    border-radius: 50%;
+    animation: girar 1s infinite;
+    margin: 15px;
+  }
+
+  @keyframes girar{
+    to{
+      transform: rotate(1turn)
+    }
+  } 
 
   .loadContainer{
     display: flex;
@@ -13,23 +29,27 @@ const GlobalStyle = createGlobalStyle`
     margin-top: 10vh;
   }
 
-  .carregando{
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    border: 1px solid red;
-    background-image: url(${Logo});
-    background-position: center;
-    animation: girar 1s infinite;   
-  }
+  
+  .legenda{
+  position: absolute;
+  margin-top: -30vh;
+  color: whitesmoke;
+  font-weight: bolder;
+  background-color: red;
+  padding: 30px;
+  border-radius: 10px;
+  animation: legenda 5s infinite;
+  cursor: pointer; 
+}
 
-  @keyframes girar{
-    from{
-      transform: scale(0)
-    }
-    to{
-      transform: scale(1);
-    }
+  @keyframes legenda{
+  from{
+    opacity: 0;
   }
+  to{
+    opacity: 1;
+  }  
+
+}
 `
 export default GlobalStyle

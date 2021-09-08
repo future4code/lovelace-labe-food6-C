@@ -1,9 +1,9 @@
 import React, {useState, useRef} from 'react'
 import {useHistory} from 'react-router-dom'
 import {url} from '../../constants/urls'
-import Logo from '../../img/logo-future-eats-invert_2021-09-06/logo-future-eats-invert.png'
-import OlhoAberto from '../../img/senha-2_2021-09-06/senha-2.png'
-import OlhoFechado from '../../img/senha-2_2021-09-06/senha.png'
+import Logo from '../../img/logo-future-eats-invert.png'
+import OlhoAberto from '../../img/senha-2.png'
+import OlhoFechado from '../../img/senha.png'
 import axios from 'axios'
 
 
@@ -45,7 +45,7 @@ const Signup = ()=>{
 			axios.post(`${url}/signup`, body).then(res=>{
 				history.push('/address')
 			}).catch(err=>{
-				alert('Algo deu errado!\n'+err.response)
+				alert('Algo deu errado!\n'+err.response.data.message)
 			})
 		}
 
