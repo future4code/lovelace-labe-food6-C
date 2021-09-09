@@ -8,6 +8,7 @@ import Address from '../pages/Address/Address'
 import Home from '../pages/Home/Home'
 import Cardapio from '../pages/Cardapio/Cardapio'
 import Perfil from '../pages/Perfil/Perfil'
+import Carrinho from '../components/Carrinho'
 
 
 const Routes = ()=>{
@@ -33,6 +34,9 @@ const Routes = ()=>{
 				</Route>
 				<Route exact path='/perfil'>
 					<Perfil/>
+				</Route>
+				<Route exact path='/carrinho'>
+					<Carrinho/>
 				</Route>				
 			</GlobalState>
 		  </Switch>

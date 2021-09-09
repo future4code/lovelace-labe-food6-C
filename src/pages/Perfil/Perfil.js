@@ -6,6 +6,11 @@ import axios from 'axios'
 import {url, headers} from '../../constants/urls'
 
 
+const Container = styled.div`
+	margin: 10px;
+`
+
+
 
 //----------Componente funcional--------------------
 const Perfil = ()=>{
@@ -18,6 +23,14 @@ const Perfil = ()=>{
 		email:'',
 		cpf:''
 	})
+
+
+
+	useEffect(()=>{
+		requests.pegarPerfil()
+		requests.historicoDePedidos()
+	}, [])
+	
 
 	const mudaForm = (e)=>{
 		const {name, value} = e.target
@@ -51,7 +64,7 @@ const Perfil = ()=>{
 
 
 //---------------Renderização---------------------
-	return<div>
+	return<Container>
 			{perfil.name}
 			<p>{perfil.email}</p>
 			{perfil.cpf}
@@ -73,9 +86,10 @@ const Perfil = ()=>{
 			</form>
 			<button onClick={ocultar} >Ocultar</button>
 			</div>
-			<p>Histórico de pedidos
-			<hr/></p>
-		  </div>
+			<p>Histórico de pedidos<hr/></p>
+			{states.pedidos.length === 0 ? <h4>Nenhum pedido.</h4>
+				: <h1>Precisa ter algo aqui</h1>}
+		  </Container>
 
 }
 export default Perfil

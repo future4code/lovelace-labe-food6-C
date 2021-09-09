@@ -1,10 +1,24 @@
-import React, {useState} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
+import Context from '../../global/Context'
 import axios from 'axios'
 import {useHistory} from 'react-router-dom'
 import {url, headers} from '../../constants/urls'
+import styled from 'styled-components'
 
+
+
+const Container = styled.div`
+	margin: 10px;
+`
+
+
+
+//---------Início do componente---------------------
 const Address = ()=>{
+	const {states, requests} = useContext(Context)
+	const [mostrar, setMostrar] = useState(false)
 	const history = useHistory()
+	const endereco = states.endereco
 	const [form, setForm] = useState({
 		street: '',
 	    number: '',
@@ -13,6 +27,7 @@ const Address = ()=>{
 	    state: '',
 	    complement: ''
 	})
+	
 
 	const mudaForm = (e)=>{
 		const {name, value} = e.target
@@ -36,9 +51,18 @@ const Address = ()=>{
 			alert('Algo deu errado!\n'+err.response)
 		})
 	}
+
+
+
+	const verEndereco = (value)=>{
+		if(Object.keys(value).length === 0 && value.constructor === Object){
+			alert('Nenhum endereço cadastrado!\nVocẽ precisa de um endereço para fazer pedidos.')
+		}
+	}
+
 	
 //Início da renderização
-	return<>
+	return<Container>
 			<div class="Title">
 				<span class="Text">
 				  Meu endereço
@@ -90,9 +114,10 @@ const Address = ()=>{
 				<div class='btn-Rectangle'>
 				<button class="Text-Style-3">
 				  Cadastrar
-				</button>
+				</button>				
 				</div>
 			</form>
-		  </>
+			<button onClick={()=> verEndereco(endereco)}>Endereço cadastrado</button>
+		</Container>
 }
 export default Address

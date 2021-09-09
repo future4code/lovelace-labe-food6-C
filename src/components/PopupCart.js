@@ -1,4 +1,4 @@
-import React, {useState, useRef, useContext} from 'react'
+import React, {useRef, useContext, useEffect} from 'react'
 import styled from 'styled-components'
 import Context from '../global/Context'
 
@@ -24,19 +24,34 @@ const Rodape = styled.div`
 `
 
 
-const PopupCart = (props)=>{
+const PopupCart = ()=>{
 	const {states, setters} = useContext(Context)
-	const pratos = states.cardapio.products
+		
 	
-
-
 	return<Popup>
-			<div>Informe a quantidade desejada</div>								
-			<input type='number' value={states.produto}
-			min='0' max='10' onChange={setters.mudaProduto} />
+			<div>Informe a quantidade desejada e forma de pagamento.</div>
+			<select value={states.produto} onChange={setters.mudaProduto}>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+				<option>6</option>
+				<option>7</option>
+				<option>8</option>
+				<option>9</option>
+				<option>10</option>
+			</select>
+			<select value={states.pagamento}
+				onChange={setters.mudaPagamento}>
+				<option>Débito</option>
+				<option>Crédito</option>
+				<option>Pix</option>
+				<option>Boleto</option>
+			</select>
 			<Rodape>
-			<span onClick={()=> setters.adicionarAoCarro(props.id, states.produto)} >
-				Adicionar ao carrinho</span>
+			<span onClick={()=> setters.adicionarAoCarro(states.idProduto)}>			
+				Adicionar ao carrinho</span>			
 			</Rodape>
 		  </Popup>
 }

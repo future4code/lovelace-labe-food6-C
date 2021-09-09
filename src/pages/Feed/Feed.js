@@ -5,10 +5,11 @@ import {Container, Categorias, Categoria,
 Restaurantes} from './styled'
 import RestaurantCard from '../../components/RestaurantCard'
 import Footer from '../../components/Footer'
+import Carrinho from '../../components/Carrinho'
 
 
 //Componente funcional-----------------------
-const Feed = (props)=>{
+const Feed = ()=>{
 	const card = useRef(null)
 	const history = useHistory()
 	const {requests, states, setters} = useContext(Context)
@@ -33,6 +34,7 @@ const Feed = (props)=>{
 		setRestaurante(e.target.value)
 	}
 //--------Buscar restaurante-------------------------------
+
 	const buscarRest = (e)=>{
 		e.preventDefault()
 
@@ -59,10 +61,8 @@ const Feed = (props)=>{
 
 	
 
-	
-
 //---Início da renderização-----------------------------------
-	return<Container>
+	return<Container ref={states.container}>
 			<form onSubmit={buscarRest}>
 			<input type='text' placeholder='Restaurante'
 			value={restaurante} onChange={onChange}
@@ -74,6 +74,8 @@ const Feed = (props)=>{
 							{rest.category}
 					   </Categoria>
 			})}</Categorias>
+
+			
 {/*----------Resultado da busca-------------------------------*/}
 			{busca.map(item=>{
 				return <RestaurantCard
@@ -100,7 +102,7 @@ const Feed = (props)=>{
 					<div class='loading'>
 					</div>
 				 </div>}
-				 </Restaurantes>
+				 </Restaurantes>				 
 				 <Footer/>				 	
 		  </Container>
 }

@@ -9,17 +9,33 @@ import {useHistory} from 'react-router-dom'
 const GlobalState = (props) =>{
 	const history = useHistory()
 	const container = useRef(null)
-	const [mostrar, setMostrar] = useState(false)
+	const [mostrar, setMostrar] = useState(false)	
 	const [idProduto, setIdProduto] = useState('')
 	const [restaurantes, setRestaurantes] = useState([])
+	const [categorias, setCategorias] = useState([])
 	const [cardapio, setCardapio] = useState([])
 	const [perfil, setPerfil] = useState([])
-	const [produto, setProduto] = useState('')
+	const [produto, setProduto] = useState(0)
+	const [pedidos, setPedidos] = useState([])
+	const [endereco, setEndereco] = useState({})
+	const [pagamento, setPagamento] = useState('')
 	const [carro, setCarro] = useState([{
 		id:'',
-		qnt:''
+		qnt:'',
+		pg: ''
 	}])
-	console.log(carro)
+console.log(carro)
+
+
+	const mudaProduto = (e)=>{
+		setProduto(e.target.value)
+	}
+
+	const mudaPagamento = (e)=>{
+		setPagamento(e.target.value)
+	}
+
+
 
 	const adicionar = (id)=>{
 		setIdProduto(id)
@@ -27,24 +43,19 @@ const GlobalState = (props) =>{
 
 	}
 
-	const voltar = ()=>{
-		setMostrar(false)
-		container.current.style.background='whitesmoke'
+	const irProCarrinho = ()=>{
+		history.push('/carrinho')
 	}
-
-
-	const mudaProduto = (e)=>{
-		setProduto(e.target.value)
-	}
-
 
 	
-	const adicionarAoCarro = (id, quantidade)=>{
+	
+	const adicionarAoCarro = (id)=>{
 		const itemDoCarro = carro.find((item)=> id === item.id)
 		if(itemDoCarro){
 			const novoCarro = carro.map(item=>{
 				if(id === item.id){
-					return{...item, id: id, qnt: Number(item.qnt) + Number(quantidade)}	
+					return{...item, id: id, qnt: Number(item.qnt) + Number(produto),
+						pg: pagamento}	
 				}
 				return item 
 			})
@@ -52,17 +63,21 @@ const GlobalState = (props) =>{
 		}else{
 			const itemNoCarro = carro.find((item)=> id === item.id)
 
-			const novoCarro = [...carro, {...itemNoCarro, id: id, qnt: Number(quantidade)+Number(quantidade)}]
+			const novoCarro = [...carro, {...itemNoCarro, id: id, qnt: Number(produto)+Number(produto),
+				pg: pagamento}]
 			setCarro(novoCarro)
 		}
-		voltar()
+
+		setMostrar(false)
+		//irProCarrinho()
 	}
 	
 
 
 	const listaDeRestaurantes = ()=>{
 		axios.get(`${url}/restaurants`, headers).then(res=>{
-			setRestaurantes(res.data.restaurants)
+			setRestaurantes(res.data.restaurants)			
+			setCategorias(res.data.restaurants.map((rest)=> {return rest.category}))
 		}).catch(err=>{
 			alert('Algo deu errado!\n'+err.response)
 		})
@@ -88,16 +103,38 @@ const GlobalState = (props) =>{
 		})
 	}
 
+	const historicoDePedidos = ()=>{
+		axios.get(`${url}/orders/history`, headers).then(res=>{
+			setPedidos(res.data.orders)
+		}).catch(err=>{
+			alert('Algo deu errado!\n'+err.response.data.message)
+		})
+	}
+
+
+	const enderecoCadastrado = ()=>{
+		axios(`${url}/profile/address`, headers).then(res=>{
+			setEndereco(res.data.address)
+		}).catch(err=>{
+			alert('Algo deu errado.\n'+err.response.data.message)
+		})
+	}
 
 	
+
 	
 
 	const states = {restaurantes, cardapio, perfil, carro, produto, mostrar,
-		idProduto, container}
-	const setters = {adicionarAoCarro, mudaProduto, adicionar}
-	const requests = {listaDeRestaurantes, detalhesRest,
-		pegarPerfil}
+		idProduto, container, pedidos, endereco, pagamento, categorias}
+
+	const setters = {adicionarAoCarro, mudaProduto, adicionar, mudaPagamento, setCardapio}
+
+	const requests = {listaDeRestaurantes, detalhesRest, pegarPerfil,
+		historicoDePedidos, enderecoCadastrado}
 	
+	
+
+
 	return<Context.Provider value={{states, setters, requests}}>
 		  	{props.children}
 		  </Context.Provider>
