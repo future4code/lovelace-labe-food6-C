@@ -37,11 +37,12 @@ const GlobalState = (props) =>{
 
 
 
-	const adicionar = (prato)=>{		
-		setItem(prato)
+	const adicionar = (prato)=>{
+		const novoItem = [...item, prato]
+		setItem(novoItem)
+		
 		setIdProduto(prato.id)
 		setMostrar(true)
-
 	}
 
 	const logout = ()=>{
@@ -51,7 +52,6 @@ const GlobalState = (props) =>{
 			history.push('/')
 		}
 	}
-
 	
 	
 	const adicionarAoCarro = (id)=>{
@@ -67,13 +67,11 @@ const GlobalState = (props) =>{
 			setCarro(novoCarro)
 		}else{
 			const itemNoCarro = carro.find((item)=> id === item.id)
-
 			const novoCarro = [...carro, {...itemNoCarro, id: id, qnt: Number(produto), pg: pagamento}]
 			setCarro(novoCarro)
 		}
 
 		setMostrar(false)
-		history.push('/carrinho')
 	}
 	
 
