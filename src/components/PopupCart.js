@@ -26,7 +26,7 @@ const Rodape = styled.div`
 
 const PopupCart = ()=>{
 	const {states, setters} = useContext(Context)
-		
+
 	
 	return<Popup>
 			<div>Informe a quantidade desejada e forma de pagamento.</div>
@@ -44,10 +44,8 @@ const PopupCart = ()=>{
 			</select>
 			<select value={states.pagamento}
 				onChange={setters.mudaPagamento}>
-				<option>Débito</option>
-				<option>Crédito</option>
-				<option>Pix</option>
-				<option>Boleto</option>
+				<option>money</option>
+				<option>creditcard</option>
 			</select>
 			<Rodape>
 			<span onClick={()=> setters.adicionarAoCarro(states.idProduto)}>			

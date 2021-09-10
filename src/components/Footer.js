@@ -21,7 +21,7 @@ const Footer = ()=>{
 	return<Foot>
 			 <img src={LogoHome} onClick={()=> history.push('/')}/>
 			 <img src={Carrinho} onClick={()=> history.push('/carrinho')} />
-			 <img src={Perfil} onClick={requests.pegarPerfil} />
+			 <img src={Perfil} onClick={()=> history.push('/perfil')} />
 		  </Foot>
 }
 export default Footer

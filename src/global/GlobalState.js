@@ -1,4 +1,3 @@
-
 import Context from './Context'
 import React, {useState, useEffect, useRef} from 'react'
 import axios from 'axios'
@@ -11,6 +10,7 @@ const GlobalState = (props) =>{
 	const container = useRef(null)
 	const [mostrar, setMostrar] = useState(false)	
 	const [idProduto, setIdProduto] = useState('')
+	const [idRestaurante, setIdRestaurante] = useState('')
 	const [restaurantes, setRestaurantes] = useState([])
 	const [categorias, setCategorias] = useState([])
 	const [cardapio, setCardapio] = useState([])
@@ -19,12 +19,12 @@ const GlobalState = (props) =>{
 	const [pedidos, setPedidos] = useState([])
 	const [endereco, setEndereco] = useState({})
 	const [pagamento, setPagamento] = useState('')
+	const [item, setItem] = useState([])
 	const [carro, setCarro] = useState([{
-		id:'',
-		qnt:'',
-		pg: ''
-	}])
-console.log(carro)
+			id:'',
+			qnt:'',
+			pg: ''
+		}])
 
 
 	const mudaProduto = (e)=>{
@@ -37,14 +37,19 @@ console.log(carro)
 
 
 
-	const adicionar = (id)=>{
-		setIdProduto(id)
+	const adicionar = (prato)=>{		
+		setItem(prato)
+		setIdProduto(prato.id)
 		setMostrar(true)
 
 	}
 
-	const irProCarrinho = ()=>{
-		history.push('/carrinho')
+	const logout = ()=>{
+		const decide = window.confirm('Tem certeza que quer sair da sua conta?')
+		if(decide){
+			const token = localStorage.removeItem('token')
+			history.push('/')
+		}
 	}
 
 	
@@ -63,21 +68,19 @@ console.log(carro)
 		}else{
 			const itemNoCarro = carro.find((item)=> id === item.id)
 
-			const novoCarro = [...carro, {...itemNoCarro, id: id, qnt: Number(produto)+Number(produto),
-				pg: pagamento}]
+			const novoCarro = [...carro, {...itemNoCarro, id: id, qnt: Number(produto), pg: pagamento}]
 			setCarro(novoCarro)
 		}
 
 		setMostrar(false)
-		//irProCarrinho()
+		history.push('/carrinho')
 	}
 	
 
 
 	const listaDeRestaurantes = ()=>{
 		axios.get(`${url}/restaurants`, headers).then(res=>{
-			setRestaurantes(res.data.restaurants)			
-			setCategorias(res.data.restaurants.map((rest)=> {return rest.category}))
+			setRestaurantes(res.data.restaurants)
 		}).catch(err=>{
 			alert('Algo deu errado!\n'+err.response)
 		})
@@ -87,6 +90,10 @@ console.log(carro)
 	const detalhesRest = (id)=>{
 		axios.get(`${url}/restaurants/${id}`, headers).then((res)=>{
 					setCardapio(res.data.restaurant)
+					setCategorias(res.data.restaurant.products.map(cat=>{
+						return cat.category
+					}))								
+					setIdRestaurante(id)
 					history.push('/cardapio')
 				}).catch(err=>{
 					console.log(err.response)
@@ -97,7 +104,6 @@ console.log(carro)
 	const pegarPerfil =()=>{
 		axios.get(`${url}/profile`, headers).then(res=>{
 			setPerfil(res.data.user)
-			history.push('/perfil')
 		}).catch(err=>{
 			alert('Algo deu errado')
 		})
@@ -125,9 +131,11 @@ console.log(carro)
 	
 
 	const states = {restaurantes, cardapio, perfil, carro, produto, mostrar,
-		idProduto, container, pedidos, endereco, pagamento, categorias}
+		idProduto, container, pedidos, endereco, pagamento, categorias, idRestaurante,
+		item}
 
-	const setters = {adicionarAoCarro, mudaProduto, adicionar, mudaPagamento, setCardapio}
+	const setters = {adicionarAoCarro, mudaProduto, adicionar, mudaPagamento,
+	 	setMostrar, logout}
 
 	const requests = {listaDeRestaurantes, detalhesRest, pegarPerfil,
 		historicoDePedidos, enderecoCadastrado}

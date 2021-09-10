@@ -2,10 +2,12 @@ import React, {useState, useEffect, useContext, useRef} from 'react'
 import {useHistory} from 'react-router-dom'
 import Context from '../../global/Context'
 import {Container, Categorias, Categoria,
-Restaurantes} from './styled'
+Restaurantes, Formulario, SearchInput, LogoPicture} from './styled'
 import RestaurantCard from '../../components/RestaurantCard'
 import Footer from '../../components/Footer'
-import Carrinho from '../../components/Carrinho'
+import Carrinho from '../Carrinho/Carrinho'
+import SearchIcon from '../../img/search.png'
+import Logo from '../../img/logo-future-eats-invert.png'
 
 
 //Componente funcional-----------------------
@@ -63,11 +65,15 @@ const Feed = ()=>{
 
 //---Início da renderização-----------------------------------
 	return<Container ref={states.container}>
-			<form onSubmit={buscarRest}>
-			<input type='text' placeholder='Restaurante'
-			value={restaurante} onChange={onChange}
-			autoFocus /><button>Buscar</button>
-			</form>
+			<LogoPicture>
+				<img src={Logo}/>
+			</LogoPicture>
+			<Formulario id='form' onSubmit={buscarRest}>
+				<img src={`${SearchIcon}`} onClick={buscarRest} />
+				<SearchInput type='text' placeholder='Restaurante'
+				value={restaurante} onChange={onChange} class='search'
+				autoFocus />
+			</Formulario>
 			<Categorias>
 			{restaurantes.map(rest=>{
 				return <Categoria onClick={()=> filtrarCategoria(rest.category)}>
@@ -75,7 +81,7 @@ const Feed = ()=>{
 					   </Categoria>
 			})}</Categorias>
 
-			
+
 {/*----------Resultado da busca-------------------------------*/}
 			{busca.map(item=>{
 				return <RestaurantCard

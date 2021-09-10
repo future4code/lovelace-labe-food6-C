@@ -6,11 +6,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
-  .olho{
-  	position: absolute;
-  	left: 44.4vw;
-  }
-
+  
   .loading{
     border: 2px solid lightgray;
     width: 50px;

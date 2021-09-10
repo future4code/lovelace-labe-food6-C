@@ -8,7 +8,7 @@ import Address from '../pages/Address/Address'
 import Home from '../pages/Home/Home'
 import Cardapio from '../pages/Cardapio/Cardapio'
 import Perfil from '../pages/Perfil/Perfil'
-import Carrinho from '../components/Carrinho'
+import Carrinho from '../pages/Carrinho/Carrinho'
 
 
 const Routes = ()=>{

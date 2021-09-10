@@ -5,6 +5,7 @@ import Logo from '../../img/logo-future-eats-invert.png'
 import OlhoAberto from '../../img/senha-2.png'
 import OlhoFechado from '../../img/senha.png'
 import axios from 'axios'
+import {Titulo, Formulario, Container, Image} from './styled'
 
 
 
@@ -76,68 +77,45 @@ const Signup = ()=>{
 	}
 
 //Início da renderização	
-	return<div class='Login'>
-
-			<img src={`${Logo}`} class="Logo_FutureEats_invert"/>
-
-			<div class="Title">
-				<span class="Text">
-				  Cadastrar
-				</span>
-			</div>
-			<form onSubmit={signup}>
-				<span class="Label-Copy">
-				  Nome*
-				</span>
-				<div class="Rectangle">
+	return<Container>
+			<Image src={`${Logo}`}/>
+			<Titulo>Cadastrar</Titulo>
+			<Formulario onSubmit={signup}>
+				<div>
 				<input type='text' autoFocus placeholder='Nome e sobrenome' name='nome'
 				value={form.nome} onChange={mudaForm} required/>
 				</div>
-				<span class="Label-Copy">
-				  E-mail*
-				</span>
 				<div class="Rectangle">
 				<input type='email' placeholder='email@email.com' name='email'
 				value={form.email} onChange={mudaForm} required/>
 				</div>
-				<span class="Label-Copy">
-				  CPF*
-				</span>
 				<div class="Rectangle">
 				<input type='text' placeholder='000.000.000-00' name='cpf'
 				value={form.cpf} onChange={mudaForm} required
 				onKeyPress={(event)=> event.charCode > 47 && event.charCode < 58} />
 				</div>
-				<span class="Label-Copy">
-				  Senha*
-				</span>
 				<div class="Rectangle">
 				<input type='password' placeholder='Senha'
 				name='senha' value={form.senha} onChange={mudaForm}
 				ref={senha} required/>
 				<img src={`${OlhoFechado}`} ref={olho} class='olho'
 				onClick={mudarOlho}/>
-				</div>									
-				<span class="Label-Copy">
-				  Confirmar*
-				</span>
-				<div class="Rectangle">
+				</div>
+				<div>
 				<input type='password' placeholder='Confirme a senha anterior'
 				name='confSenha' value={form.confSenha} onChange={mudaForm}
 				ref={senha2} required/>
-				<img src={`${OlhoFechado}`} ref={olho2} class='olho'
+				<img src={`${OlhoFechado}`} ref={olho2} class='olho2'
 				onClick={mudarOlho2}/>
 				</div>
-				<div class='btn-Rectangle'>
-				<button class="Text-Style-3">
-				  Criar
-				</button>
+				<div>
+				<button>Criar</button>
 				<button class="Text-Style-3" 
 				onClick={()=> history.push('/login')} >
 				  Voltar para login
 				</button>
 				</div>
-			</form>
-		  </div>
+			</Formulario>
+		  </Container>
 }
 export default Signup
