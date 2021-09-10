@@ -2,11 +2,11 @@ import {createGlobalStyle} from 'styled-components'
 import Logo from './img/logo-future-eats-invert.png'
 
 const GlobalStyle = createGlobalStyle`
-  .olho{
-  	position: absolute;
-  	left: 44.4vw;
+  body{
+    margin: 0;
   }
 
+  
   .loading{
     border: 2px solid lightgray;
     width: 50px;

@@ -15,13 +15,13 @@ const Foot = styled.div`
 	margin: 10px 30px;
 `
 //Componente funcional
-const Footer = (props)=>{
-	const {states, requests} = useContext(Context)
+const Footer = ()=>{
+	const {setters, requests} = useContext(Context)
 	const history = useHistory()
 	return<Foot>
 			 <img src={LogoHome} onClick={()=> history.push('/')}/>
-			 <img src={Carrinho} />
-			 <img src={Perfil} onClick={requests.pegarPerfil} />
+			 <img src={Carrinho} onClick={()=> history.push('/carrinho')} />
+			 <img src={Perfil} onClick={()=> history.push('/perfil')} />
 		  </Foot>
 }
 export default Footer

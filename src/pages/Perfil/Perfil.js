@@ -4,20 +4,36 @@ import {useHistory} from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios'
 import {url, headers} from '../../constants/urls'
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import {Container, Header, SectionOne, SectionTwo, BtnHide,
+BtnForm, Pedidos} from './styled'
+import EditIcon from '@material-ui/icons/Edit';
+import Footer from '../../components/Footer'
+
 
 
 
 //----------Componente funcional--------------------
 const Perfil = ()=>{
 	const history = useHistory()
-	const {states, requests} = useContext(Context)
+	const {states, setters, requests} = useContext(Context)
+	const pedidos = states.pedidos
 	const perfil = states.perfil
+	const [pedido, setPedido] = useState([]) 
 	const editar = useRef(null)
 	const [form, setForm] = useState({
 		nome:'',
 		email:'',
 		cpf:''
 	})
+	
+
+
+	useEffect(()=>{
+		requests.pegarPerfil()
+		requests.historicoDePedidos()
+	}, [])
+	
 
 	const mudaForm = (e)=>{
 		const {name, value} = e.target
@@ -51,31 +67,64 @@ const Perfil = ()=>{
 
 
 //---------------Renderização---------------------
-	return<div>
-			{perfil.name}
-			<p>{perfil.email}</p>
-			{perfil.cpf}
-			<p>{perfil.address}</p>
-			<button onClick={edite} >Editar</button>
-			<button onClick={()=> history.push('/address')}>
-			Editar endereço</button>
+	const dataDoPedido = pedidos.map(pedido=>{
+		return pedido.createdAt
+	})
+	const expiracao = pedidos.map(pedido=>{
+		return pedido.expiresAt
+	})
+
+	let data = new Date(dataDoPedido)
+	console.log(data.toLocaleDateString())
+	
+
+	return<Container>
+			<Header>
+			<h3>Meu perfil</h3><PersonOutlineIcon style={{fontSize:'2.5rem',
+			color:'lightgray'}} onClick={setters.logout} />
+			</Header>
+			<hr/>
+			<SectionOne>
+				<p>{perfil.name}<br/>
+				{perfil.email}<br/>
+				{perfil.cpf}</p>
+				<EditIcon onClick={edite}/>
+			</SectionOne>
+			<SectionTwo>				
+				<span>
+				<div style={{color:'lightgray'}}>Endereço cadastrado</div>
+				{perfil.address}</span>
+				<EditIcon onClick={()=> history.push('/address')}/>
+			</SectionTwo>			
 			<div ref={editar} style={{display:'none'}}>
-			<form
-			onSubmit={atualizarPerfil}>
-				<hr/>
+			<hr/><BtnHide onClick={ocultar} >Ocultar</BtnHide>
+			<form onSubmit={atualizarPerfil}>
 				<input type='text' autoFocus placeholder='Nome e sobrenome' 
 				name='nome' value={form.nome} onChange={mudaForm} required/>
 				<input type='email' placeholder='email@email.com'
 				name='email' value={form.email} onChange={mudaForm} required/>
 				<input type='text' placeholder='000.000.000-00'
 				name='cpf' value={form.cpf} onChange={mudaForm} required/>				
-				<button>Atualizar</button>				
-			</form>
-			<button onClick={ocultar} >Ocultar</button>
+				<br/><BtnForm>Atualizar</BtnForm>				
+			</form>			
 			</div>
-			<p>Histórico de pedidos
-			<hr/></p>
-		  </div>
+			<p>Histórico de pedidos<hr/></p>
+			{pedidos.length > 0 ? pedidos.map(pedido=>{
+				return<Pedidos>
+						<div class='titulo'>
+							{pedido.restaurantName}
+						</div>
+						<p>Data: {dataDoPedido}<br/>
+							Expiração: {expiracao}</p>
+						<div class='total'>
+						SUBTOTAL: R$ {pedido.totalPrice}
+						</div>
+					  </Pedidos>
+			}) : <div class='loadContainer'>
+					<div class='loading'></div>
+					</div>}
+				<Footer/>
+		  </Container>
 
 }
 export default Perfil

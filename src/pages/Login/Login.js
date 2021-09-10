@@ -5,6 +5,7 @@ import {useHistory, Link} from 'react-router-dom'
 import Logo from '../../img/logo-future-eats-invert.png'
 import OlhoAberto from '../../img/senha-2.png'
 import OlhoFechado from '../../img/senha.png'
+import {Container, Image, Formulario, Titulo} from './styled'
 
 
 
@@ -54,40 +55,26 @@ const Login = ()=>{
 	}
 
 //Início da renderização
-	return<div class='Login'>
-
-			<img src={`${Logo}`} class="Logo_FutureEats_invert"/>
-
-			<div class="Title">
-				<span class="Text">
-				  Entrar
-				</span>
-			</div>
-			<form onSubmit={login}>
-				<span class="Label-Copy">
-				  E-mail*
-				</span>
-				<div class="Rectangle">
+	return<Container>
+			<Image src={`${Logo}`} class="Logo_FutureEats_invert"/>
+			<Titulo>Entrar</Titulo>
+			<Formulario onSubmit={login}>
+				<div >
 				<input type='email' autoFocus placeholder='email@email.com' name='email'
 				value={form.email} onChange={mudaForm} required/>
 				</div>
-				<span class="Label-Copy">
-				  Senha*
-				</span>
-				<div class="Rectangle">
+				<div>
 				<input type='password' placeholder='Mínimo 6 caracteres' name='senha'
 				value={form.senha} onChange={mudaForm} ref={senha} required/>
 				<img src={`${OlhoFechado}`} ref={olho}
-				onClick={mudarOlho} class='olho'/>
+				onClick={mudarOlho} />
 				</div>
-				<div class='btn-Rectangle'>
-				<button class="Text-Style-3">
-				  Entrar
-				</button>
+				<div>
+				<button>Entrar</button>
 				</div>
 				Não possui cadastro? clique <Link to={'/signup'}> aqui</Link>
-			</form>
-		  </div> 
+			</Formulario>
+		  </Container> 
 }
 export default Login
 
