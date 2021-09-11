@@ -40,7 +40,6 @@ console.log(carro)
 		return soma
 	}
 
-	console.log(total())
 
 	useEffect(()=>{
 		requests.pegarPerfil()
@@ -73,24 +72,7 @@ console.log(carro)
 				<div class='restaurante'>{cardapio.name}</div>				
 				<div class='endereco'>{cardapio.address}</div>				
 			</SectionTwo>
-				<hr/>
-
-				{item.length > 0 ? item.map(produto=>{
-						return<CardPratos>										
-								<div class='head-card'>
-									<Picture src={produto.photoUrl}/>
-								</div>												
-								<div class='texto'>
-									<h4>{produto.name}</h4>
-									<p>{produto.description}</p>
-									R$ {produto.price}
-								</div>																																														
-						    </CardPratos>
-					}) : <div class='loadContainer'>
-							<div class='loading'>
-							</div>
-						 </div>}
-						 <h4>SUBTOTAL: R$ {total()}</h4>				
+				<hr/>				
 			    <p style={{textAlign:'center'}}><button onClick={finalizarCompra} >Finalizar compra</button></p>	
 				<Footer/>
 		  </Container>

@@ -18,29 +18,16 @@ const GlobalState = (props) =>{
 	const [produto, setProduto] = useState(0)
 	const [pedidos, setPedidos] = useState([])
 	const [endereco, setEndereco] = useState({})
-	const [pagamento, setPagamento] = useState('')
-	const [item, setItem] = useState([])
-	const [carro, setCarro] = useState([{
-			id:'',
-			qnt:'',
-			pg: ''
-		}])
+	const [carro, setCarro] = useState([])
 
 
 	const mudaProduto = (e)=>{
 		setProduto(e.target.value)
 	}
 
-	const mudaPagamento = (e)=>{
-		setPagamento(e.target.value)
-	}
+	
 
-
-
-	const adicionar = (prato)=>{
-		const novoItem = [...item, prato]
-		setItem(novoItem)
-		
+	const adicionar = (prato)=>{		
 		setIdProduto(prato.id)
 		setMostrar(true)
 	}
@@ -59,15 +46,14 @@ const GlobalState = (props) =>{
 		if(itemDoCarro){
 			const novoCarro = carro.map(item=>{
 				if(id === item.id){
-					return{...item, id: id, qnt: Number(item.qnt) + Number(produto),
-						pg: pagamento}	
+					return{...item, id: id, qnt: Number(item.qnt) + Number(produto)}	
 				}
 				return item 
 			})
 			setCarro(novoCarro)
 		}else{
 			const itemNoCarro = carro.find((item)=> id === item.id)
-			const novoCarro = [...carro, {...itemNoCarro, id: id, qnt: Number(produto), pg: pagamento}]
+			const novoCarro = [...carro, {...itemNoCarro, id: id, qnt: Number(produto)}]
 			setCarro(novoCarro)
 		}
 
@@ -129,11 +115,9 @@ const GlobalState = (props) =>{
 	
 
 	const states = {restaurantes, cardapio, perfil, carro, produto, mostrar,
-		idProduto, container, pedidos, endereco, pagamento, categorias, idRestaurante,
-		item}
+		idProduto, container, pedidos, endereco, categorias, idRestaurante}
 
-	const setters = {adicionarAoCarro, mudaProduto, adicionar, mudaPagamento,
-	 	setMostrar, logout}
+	const setters = {adicionarAoCarro, mudaProduto, adicionar, setMostrar, logout}
 
 	const requests = {listaDeRestaurantes, detalhesRest, pegarPerfil,
 		historicoDePedidos, enderecoCadastrado}

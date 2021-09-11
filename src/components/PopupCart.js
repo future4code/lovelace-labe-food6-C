@@ -41,12 +41,7 @@ const PopupCart = ()=>{
 				<option>8</option>
 				<option>9</option>
 				<option>10</option>
-			</select>
-			<select value={states.pagamento}
-				onChange={setters.mudaPagamento}>
-				<option>money</option>
-				<option>creditcard</option>
-			</select>
+			</select>			
 			<Rodape>
 			<span onClick={()=> setters.adicionarAoCarro(states.idProduto)}>			
 				Adicionar ao carrinho</span>			
