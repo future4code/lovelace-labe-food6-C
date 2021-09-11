@@ -15,13 +15,16 @@ const Cardapio = ()=>{
 	const pratos = cardapio.products
 	const categorias = states.categorias
 
+	console.log(states.item)
+	console.log(states.carro)
 	
 
 //-------------Renderização	================
 	return<Card ref={states.container}>		
 			<Image src={cardapio.logoUrl}/>
-			{states.mostrar ? <PopupCart /> : null}
-			   {states.mostrar ? states.container.current.style.background='#4e4e4e': null}			   
+			   {states.mostrar ? <PopupCart /> : null}
+			   {states.mostrar ? states.container.current.style.background='#4e4e4e': 
+			   states.container.current.style.background = 'whitesmoke'}			   
 			<Texto><h4>{cardapio.name}</h4>
 			   <p>{cardapio.category}</p>
 			   <Tempo>{cardapio.deliveryTime} - {cardapio.deliveryTime + 10} min

@@ -11,11 +11,7 @@ export const Container = styled.div`
 		border: none;
 	}
 `
-export const Header = styled.header`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-` 
+
 export const SectionOne = styled.div`
 	background-color: whitesmoke;
 	.informativo{

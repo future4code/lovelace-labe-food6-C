@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react'
 import Context from '../../global/Context'
 import {url, headers} from '../../constants/urls'
 import axios from 'axios'
-import {Container, Header, SectionOne, SectionTwo,
+import {Container, SectionOne, SectionTwo,
 CardPratos, Picture, Qnt} from './styled'
 import Footer from '../../components/Footer'
 
@@ -16,6 +16,9 @@ const Carrinho = ()=>{
 	const perfil = states.perfil
 	const item = states.item
 
+console.log(item)
+console.log(carro)
+
 
 	const idItem = carro.map(car=>{
 		return car.id
@@ -26,14 +29,23 @@ const Carrinho = ()=>{
 	const pg = carro.map(car=>{
 		return car.pg
 	})
-	
+
+
+	const total = ()=>{
+		let soma = 0
+		for(let valor of item){
+			soma += valor.price
+		}
+
+		return soma
+	}
+
 
 	useEffect(()=>{
 		requests.pegarPerfil()
 	}, [])
 
 		
-	console.log(carro)
 	
 	const finalizarCompra = ()=>{
 		const body = {
@@ -49,10 +61,8 @@ const Carrinho = ()=>{
 
 	}	
 
-	return <Container>
-			<Header>
-			<h3>Meu carrinho</h3>
-			</Header>
+	return <Container>			
+			<h3>Meu carrinho</h3>			
 			<hr/>			
 			<SectionOne>
 				<div><div class='informativo'>Endereço para entrega</div>
@@ -62,17 +72,7 @@ const Carrinho = ()=>{
 				<div class='restaurante'>{cardapio.name}</div>				
 				<div class='endereco'>{cardapio.address}</div>				
 			</SectionTwo>
-				<hr/>
-				<CardPratos>					
-					<div class='head-card'>
-						<Picture src={item.photoUrl}/>
-					</div>												
-					<div class='texto'>
-						<h4>{item.name}</h4>
-						<p>{item.description}</p>
-						R$ {item.price}
-					</div>																																						
-			    </CardPratos>
+				<hr/>				
 			    <p style={{textAlign:'center'}}><button onClick={finalizarCompra} >Finalizar compra</button></p>	
 				<Footer/>
 		  </Container>
