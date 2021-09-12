@@ -32,7 +32,7 @@
 		<li><p>
 			Conclusão:<br>
 			E a começar por esse pequeno detalhe a conclusão do projeto não pôde ser íntegra, pois a contabilidade nunca será coerente na hora de finalizar as compras,
-			é um erro fatal. E além disso também encontrei muitas dificuldades para manipular os botões de rádio, o navegador até reconhece os valores quando alternados, mas não conwgui enviá-los ao estado do componente.</p>
+			é um erro fatal. E além disso também encontrei muitas dificuldades para manipular os botões de rádio, o navegador até reconhece os valores quando alternados, mas não conegui enviá-los ao estado do componente.</p>
 		</li>
 	</ul>
 </body>
