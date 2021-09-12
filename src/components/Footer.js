@@ -19,7 +19,7 @@ const Footer = ()=>{
 	const {setters, requests} = useContext(Context)
 	const history = useHistory()
 	return<Foot>
-			 <img src={LogoHome} onClick={()=> history.push('/')}/>
+			 <img src={LogoHome} onClick={()=> history.push('/feed')}/>
 			 <img src={Carrinho} onClick={()=> history.push('/carrinho')} />
 			 <img src={Perfil} onClick={()=> history.push('/perfil')} />
 		  </Foot>

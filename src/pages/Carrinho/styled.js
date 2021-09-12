@@ -4,11 +4,14 @@ export const Container = styled.div`
 	margin: 23px;
 	line-height: 6vh;	
 	button{
-		width: 82.6vw;
+		width: 88vw;
 		height: 7vh;
 		font-weight: bold;
 		background-color: #e8222e;
 		border: none;
+	}
+	.pagar{
+		float: left;
 	}
 `
 
@@ -29,30 +32,23 @@ export const SectionTwo = styled.div`
 	}
 `
 export const CardPratos = styled.div`
-	display: flex;
-	align-items: center;
+	position: relative;
 	margin: 10px;
 	border: 1px solid;
 	border-radius: 10px;
-	h4{
+	box-sizing: content-box;
+	.sessao{
+		position: absolute;
+		left: 30%;
+		bottom: 10%;
+	}
+	.nome{
 		color: red;
-		margin-bottom: -10px;
 	}
-	p{
-		color: gray;
-		font-size: 10pt;
-	}
-	.texto{
-		margin: 10px;
-	}
-	button{
-		background-color: #e8222e;
-		border-radius: 10px;
-		margin-top: 30vh;
-		width: 100px;
-		font-weight: light;
-		margin-left: 30vw;
-	}		
+	.preco{
+		font-weight: bold;
+		margin-top: 20px;
+	}	
 `
 export const Qnt = styled.span`
 	position: absolute;
@@ -68,3 +64,17 @@ export const Picture = styled.img`
 	height: 130px;	
 	border-radius: 10px;
 `
+export const Total = styled.div`
+	margin-left: 12px;
+`
+export const Pagamento = styled.div`
+	margin-bottom: 30px;
+	label{
+		float: left;
+	}
+	input{
+		float: left;
+	}
+`
+
+
