@@ -8,9 +8,9 @@ import {useHistory} from 'react-router-dom'
 const GlobalState = (props) =>{
 	const history = useHistory()
 	const container = useRef(null)
-	const [mostrar, setMostrar] = useState(false)	
-	const [idProduto, setIdProduto] = useState('')
+	const [mostrar, setMostrar] = useState(false)
 	const [idRestaurante, setIdRestaurante] = useState('')
+	const [idProduto, setIdProduto] = useState('')
 	const [restaurantes, setRestaurantes] = useState([])
 	const [categorias, setCategorias] = useState([])
 	const [cardapio, setCardapio] = useState([])
@@ -19,17 +19,20 @@ const GlobalState = (props) =>{
 	const [pedidos, setPedidos] = useState([])
 	const [endereco, setEndereco] = useState({})
 	const [carro, setCarro] = useState([])
+	const [sacola, setSacola] = useState([])
+
 
 
 	const mudaProduto = (e)=>{
 		setProduto(e.target.value)
 	}
 
-	
 
-	const adicionar = (prato)=>{		
-		setIdProduto(prato.id)
+	const adicionar = (prato)=>{
+		const novaSacola = [...sacola, prato]
+		setSacola(novaSacola)
 		setMostrar(true)
+		setIdProduto(prato.id)
 	}
 
 	const logout = ()=>{
@@ -58,6 +61,7 @@ const GlobalState = (props) =>{
 		}
 
 		setMostrar(false)
+		history.push('/carrinho')
 	}
 	
 
@@ -115,7 +119,8 @@ const GlobalState = (props) =>{
 	
 
 	const states = {restaurantes, cardapio, perfil, carro, produto, mostrar,
-		idProduto, container, pedidos, endereco, categorias, idRestaurante}
+		container, pedidos, endereco, categorias, idRestaurante, idProduto,
+		sacola}
 
 	const setters = {adicionarAoCarro, mudaProduto, adicionar, setMostrar, logout}
 

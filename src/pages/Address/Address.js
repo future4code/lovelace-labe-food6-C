@@ -24,7 +24,7 @@ const Address = ()=>{
 	    complement: ''
 	})
 	
-
+console.log(endereco)
 	const mudaForm = (e)=>{
 		const {name, value} = e.target
 		setForm({...form, [name]: value})
@@ -47,14 +47,7 @@ const Address = ()=>{
 			alert('Algo deu errado!\n'+err.response.data.message)
 		})
 	}
-
-
-
-	const verEndereco = (value)=>{
-		if(Object.keys(value).length === 0 && value.constructor === Object){
-			alert('Nenhum endereço cadastrado!\nVocẽ precisa de um endereço para fazer pedidos.')
-		}
-	}
+	
 
 	
 //Início da renderização
@@ -92,7 +85,6 @@ const Address = ()=>{
 				</button>				
 				</div>
 			</Formulario>
-			<Botao onClick={()=> verEndereco(endereco)}>Endereço cadastrado</Botao>
 		</Container>
 }
 export default Address
