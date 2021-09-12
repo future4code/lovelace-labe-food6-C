@@ -23,8 +23,8 @@
 			frete e o tempo de entrega. No cabeçalho há uma caixa de texto para busca e logo abaixo
 			um filtro com as categorias dos respectivos restaurantes. Clicando no outdoor de cada restaurantes
 			você é direcionado para a pagina de detalhes. Onde poderá realizar seu pedido indicando
-			o produto e quantidade. Isso é feito clicando no botão adicionar, onde será 
-			aberto uma janela popup.
+			o produto e quantidade. Isso é feito clicando no botão adicionar, quando será 
+			aberta uma janela popup.
 			<p><img src="imgREADME/adicionar.png">
 			<img src="imgREADME/sem-adicao.png"> </p>
 			Aqui começam alguns erros. O valor que vem do input select não chega ao estado se não houver nenhum evento no input, ou seja, se o cliente simplesmente clicar no botão adicionar para abrir o popup e adicionar ao carrinho sem mexer no select, o valor da quantidade de produtos chegará como zero à API, o valor só é posto quando há eventos no input select(quando onChange no caso), ainda que o seu valor por padrão já seja o número 1 como se pode ver na imagem acima.
