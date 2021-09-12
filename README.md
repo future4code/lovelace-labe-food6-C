@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title></title>
-</head>
+
 <body>
 	<img src="src/img/logo-future-eats-invert.png">
 	<h3>Aplicativo web para serviços de restaurantes</h3>
@@ -41,11 +35,3 @@
 			é um erro fatal. E além disso também encontrei muitas dificuldades para manipular os botões de rádio, o navegador até reconhece os valores quando alternados, mas não conwgui enviá-los ao estado do componente.</p>
 		</li>
 	</ul>
-=======
-<img src='/src/img/logo-future-eats-invert.png'>
-Status: Interminado ⚠️
-<h4>Aplicativo web para serviços de restaurantes
->>>>>>> cdab0e9a09b6f7464d06f6e833d4c0bad537fd86
-
-</body>
-</html>
