@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext, useRef} from 'react'
 import {useHistory} from 'react-router-dom'
 import Context from '../../global/Context'
 import {Container, Categorias, Categoria,
-Restaurantes, Formulario, SearchInput, LogoPicture} from './styled'
+Restaurantes, SearchInput, Search, LogoPicture} from './styled'
 import RestaurantCard from '../../components/RestaurantCard'
 import Footer from '../../components/Footer'
 import Carrinho from '../Carrinho/Carrinho'
@@ -18,7 +18,7 @@ const Feed = ()=>{
 	const restaurantes = states.restaurantes
 	const [restaurante, setRestaurante] = useState('')
 	const [busca, setBusca] = useState([])
-
+console.log(busca)
 	
 
 
@@ -36,20 +36,10 @@ const Feed = ()=>{
 		setRestaurante(e.target.value)
 	}
 //--------Buscar restaurante-------------------------------
-
-	const buscarRest = (e)=>{
-		e.preventDefault()
-
-		const achado = restaurantes
-		.filter(rest=> rest.name.toLowerCase() === 
-			restaurante.toLowerCase())
-		setBusca(achado)
-		if(busca.length === 0){
-			card.current.style.display = 'block'			
-		}else{
-			card.current.style.display = 'none'
-		}
-	}
+	const achado = restaurantes.filter(rest=>{
+		return rest.name.toLowerCase().includes(restaurante.toLowerCase())
+	})
+	
 //--------------Filtro de categoria-------------------------
 	const filtrarCategoria = (categoria)=>{
 		const filtro = restaurantes.filter((rest)=> rest.category === categoria)
@@ -68,12 +58,10 @@ const Feed = ()=>{
 			<LogoPicture>
 				<img src={Logo}/>
 			</LogoPicture>
-			<Formulario id='form' onSubmit={buscarRest}>
-				<img src={`${SearchIcon}`} onClick={buscarRest} />
+				<Search src={`${SearchIcon}`}/>
 				<SearchInput type='text' placeholder='Restaurante'
 				value={restaurante} onChange={onChange} class='search'
 				autoFocus />
-			</Formulario>
 			<Categorias>
 			{restaurantes.map(rest=>{
 				return <Categoria onClick={()=> filtrarCategoria(rest.category)}>
@@ -96,7 +84,7 @@ const Feed = ()=>{
 {/*-----------Lista de restaurantes--------------------------------*/}
 			<Restaurantes ref={card}>
 			{restaurantes.length > 0 ?
-			 restaurantes.map(restaurante=>{
+			 achado.map(restaurante=>{
 				return <RestaurantCard key={restaurante.id}
 						img={restaurante.logoUrl}
 						nome={restaurante.name}

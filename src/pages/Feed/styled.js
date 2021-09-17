@@ -5,16 +5,11 @@ export const Container = styled.div`
 	margin: 10px;
 	border: 1px solid;	
 `
-export const Formulario = styled.form`
-	margin: 3px;
-	margin-bottom: -6vh;
-	text-align: center;
-	img{
-		position: absolute;
-		left: 86%;
-		top: 14%;
-		width: 30px;
-	}	
+export const Search = styled.img`
+	position: absolute;
+	left: 86%;
+	top: 14%;
+	width: 30px;
 `
 export const SearchInput = styled.input`
 	height: 7vh;
