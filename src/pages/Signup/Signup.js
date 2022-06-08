@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import {url} from '../../constants/urls'
 import Logo from '../../img/logo-future-eats-invert.png'
 import OlhoAberto from '../../img/senha-2.png'
@@ -15,7 +15,7 @@ const Signup = ()=>{
 	const olho2 = useRef(null)
 	const senha2 = useRef(null)
 	const focarSenha = useRef(null)
-	const history = useHistory()
+	const history = useNavigate()
 	const [form, setForm] = useState({
 		nome:'',
 		email:'',
@@ -44,7 +44,7 @@ const Signup = ()=>{
 			focarSenha.current.focus()
 		}else{
 			axios.post(`${url}/signup`, body).then(res=>{
-				history.push('/address')
+				history('/address')
 			}).catch(err=>{
 				alert('Algo deu errado!\n'+err.response.data.message)
 			})
@@ -85,33 +85,33 @@ const Signup = ()=>{
 				<input type='text' autoFocus placeholder='Nome e sobrenome' name='nome'
 				value={form.nome} onChange={mudaForm} required/>
 				</div>
-				<div class="Rectangle">
+				<div className="Rectangle">
 				<input type='email' placeholder='email@email.com' name='email'
 				value={form.email} onChange={mudaForm} required/>
 				</div>
-				<div class="Rectangle">
+				<div className="Rectangle">
 				<input type='text' placeholder='000.000.000-00' name='cpf'
 				value={form.cpf} onChange={mudaForm} required
 				onKeyPress={(event)=> event.charCode > 47 && event.charCode < 58} />
 				</div>
-				<div class="Rectangle">
+				<div className="Rectangle">
 				<input type='password' placeholder='Senha'
 				name='senha' value={form.senha} onChange={mudaForm}
 				ref={senha} required/>
-				<img src={`${OlhoFechado}`} ref={olho} class='olho'
+				<img src={`${OlhoFechado}`} ref={olho} className='olho'
 				onClick={mudarOlho}/>
 				</div>
 				<div>
 				<input type='password' placeholder='Confirme a senha anterior'
 				name='confSenha' value={form.confSenha} onChange={mudaForm}
 				ref={senha2} required/>
-				<img src={`${OlhoFechado}`} ref={olho2} class='olho2'
+				<img src={`${OlhoFechado}`} ref={olho2} className='olho2'
 				onClick={mudarOlho2}/>
 				</div>
 				<div>
 				<button>Criar</button>
-				<button class="Text-Style-3" 
-				onClick={()=> history.push('/login')} >
+				<button className="Text-Style-3" 
+				onClick={()=> history('/login')} >
 				  Voltar para login
 				</button>
 				</div>

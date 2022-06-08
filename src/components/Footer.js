@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import LogoHome from '../img/homepage.png'
 import Carrinho from '../img/shopping-cart.png'
 import Perfil from '../img/avatar.png'
@@ -17,11 +17,11 @@ const Foot = styled.div`
 //Componente funcional
 const Footer = ()=>{
 	const {setters, requests} = useContext(Context)
-	const history = useHistory()
+	const history = useNavigate()
 	return<Foot>
-			 <img src={LogoHome} onClick={()=> history.push('/feed')}/>
-			 <img src={Carrinho} onClick={()=> history.push('/carrinho')} />
-			 <img src={Perfil} onClick={()=> history.push('/perfil')} />
+			 <img src={LogoHome} onClick={()=> history('/feed')}/>
+			 <img src={Carrinho} onClick={()=> history('/carrinho')} />
+			 <img src={Perfil} onClick={()=> history('/perfil')} />
 		  </Foot>
 }
 export default Footer

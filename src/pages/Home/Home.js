@@ -1,5 +1,5 @@
 import React from 'react'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import styled from 'styled-components'
 import Logo from '../../img/logo-future-eats.png'
 
@@ -21,15 +21,15 @@ const Image = styled.img`
 `
 
 const Home = ()=>{
-	const history = useHistory()
+	const history = useNavigate()
 
 	
 	return<Container>
-			<div class='legenda' onClick={()=> 
-			history.push('/login')}>Clique para logar
+			<div className='legenda' onClick={()=> 
+			history('/login')}>Clique para logar
 			</div>
-			<Image class='image' src={`${Logo}`}			
-			onClick={()=> history.push('/login')}/>
+			<Image className='image' src={`${Logo}`}			
+			onClick={()=> history('/login')}/>
 		  </Container>
 }
 export default Home

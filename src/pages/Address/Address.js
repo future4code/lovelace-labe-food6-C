@@ -1,7 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react'
 import Context from '../../global/Context'
 import axios from 'axios'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import {url, headers} from '../../constants/urls'
 import {Titulo, Formulario, Container, Image,
 Botao} from './styled'
@@ -13,7 +13,7 @@ import Header from '../../components/Header'
 const Address = ()=>{
 	const {states, requests} = useContext(Context)
 	const [mostrar, setMostrar] = useState(false)
-	const history = useHistory()
+	const history = useNavigate()
 	const endereco = states.endereco
 	const [form, setForm] = useState({
 		street: '',
@@ -59,27 +59,27 @@ console.log(endereco)
 				<input type='text' autoFocus placeholder='Rua / Av.'
 				 name='street' value={form.street} onChange={mudaForm} required/>
 				</div>
-				<div class="Rectangle">
+				<div className="Rectangle">
 				<input type='number' placeholder='Número' name='number'
 				value={form.number} onChange={mudaForm} required/>
 				</div>
-				<div class="Rectangle">
+				<div className="Rectangle">
 				<input type='text' placeholder='Bairro' name='neighbourhood'
 				value={form.neighbourhood} onChange={mudaForm} required/>
 				</div>
-				<div class="Rectangle">
+				<div className="Rectangle">
 				<input type='text' placeholder='Cidade' name='city'
 				value={form.city} onChange={mudaForm}required/>
 				</div>
-				<div class="Rectangle">
+				<div className="Rectangle">
 				<input type='text' placeholder='Estado'
 				name='state' value={form.state} onChange={mudaForm} required/>
 				</div>
-				<div class="Rectangle">
+				<div className="Rectangle">
 				<input type='text' placeholder='Complemento' name='complement'
 				value={form.complement} onChange={mudaForm}/>
 				</div>
-				<div class='btn-Rectangle'>
+				<div className='btn-Rectangle'>
 				<button class="Text-Style-3">
 				  Cadastrar
 				</button>				

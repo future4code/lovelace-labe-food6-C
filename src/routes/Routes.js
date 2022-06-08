@@ -1,6 +1,5 @@
 import React from 'react'
-import {Switch, Route} from 'react-router-dom'
-import GlobalState from '../global/GlobalState'
+import {Routes, Route} from 'react-router-dom'
 import Login from '../pages/Login/Login'
 import Feed from '../pages/Feed/Feed'
 import Signup from '../pages/Signup/Signup'
@@ -11,34 +10,16 @@ import Perfil from '../pages/Perfil/Perfil'
 import Carrinho from '../pages/Carrinho/Carrinho'
 
 
-const Routes = ()=>{
-	return<Switch>
-			<GlobalState>
-				<Route exact path='/'>
-					<Home/>
-				</Route>
-				<Route exact path='/login'>
-					<Login />
-				</Route>
-				<Route exact path='/signup'>
-					<Signup/>
-				</Route>
-				<Route exact path='/address'>
-					<Address/>
-				</Route>
-				<Route exact path='/feed'>
-					<Feed />
-				</Route>
-				<Route exact path='/cardapio'>
-					<Cardapio/>
-				</Route>
-				<Route exact path='/perfil'>
-					<Perfil/>
-				</Route>
-				<Route exact path='/carrinho'>
-					<Carrinho/>
-				</Route>				
-			</GlobalState>
-		  </Switch>
+const Router = ()=>{
+	return<Routes>
+			<Route exact path='/' element={<Home/>} />
+			<Route exact path='/login' element={<Login/>} />
+			<Route exact path='/signup' element={<Signup/>} />
+			<Route exact path='/address' element={<Address/>} />
+			<Route exact path='/feed' element={<Feed/>} />
+			<Route exact path='/cardapio' element={<Cardapio/>} />
+			<Route exact path='/perfil' element={<Perfil/>} />
+			<Route exact path='/carrinho' element={<Carrinho/>} />
+		  </Routes>
 }
-export default Routes
+export default Router

@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext, useRef} from 'react'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import Context from '../../global/Context'
 import {Container, Categorias, Categoria,
 Restaurantes, SearchInput, Search, LogoPicture} from './styled'
@@ -13,7 +13,7 @@ import Logo from '../../img/logo-future-eats-invert.png'
 //Componente funcional-----------------------
 const Feed = ()=>{
 	const card = useRef(null)
-	const history = useHistory()
+	const history = useNavigate()
 	const {requests, states, setters} = useContext(Context)
 	const restaurantes = states.restaurantes
 	const [restaurante, setRestaurante] = useState('')
@@ -26,7 +26,7 @@ console.log(busca)
 		const token = localStorage.getItem('token')
 		if(token === null){
 			alert('Página inacessível!\nVocê não está logado.')
-			history.push('/login')
+			history('/login')
 		}
 		requests.listaDeRestaurantes()
 	}, [])
@@ -60,7 +60,7 @@ console.log(busca)
 			</LogoPicture>
 				<Search src={`${SearchIcon}`}/>
 				<SearchInput type='text' placeholder='Restaurante'
-				value={restaurante} onChange={onChange} class='search'
+				value={restaurante} onChange={onChange} className='search'
 				autoFocus />
 			<Categorias>
 			{restaurantes.map(rest=>{
@@ -92,8 +92,8 @@ console.log(busca)
 						entrega={restaurante.deliveryTime}
 						frete={restaurante.shipping}
 					   />
-			}) : <div class='loadContainer'>
-					<div class='loading'>
+			}) : <div className='loadContainer'>
+					<div className='loading'>
 					</div>
 				 </div>}
 				 </Restaurantes>				 

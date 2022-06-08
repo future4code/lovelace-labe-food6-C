@@ -2,11 +2,11 @@ import Context from './Context'
 import React, {useState, useEffect, useRef} from 'react'
 import axios from 'axios'
 import {url, headers} from '../constants/urls'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 
 const GlobalState = (props) =>{
-	const history = useHistory()
+	const history = useNavigate()
 	const container = useRef(null)
 	const [mostrar, setMostrar] = useState(false)
 	const [idRestaurante, setIdRestaurante] = useState('')
@@ -39,7 +39,7 @@ const GlobalState = (props) =>{
 		const decide = window.confirm('Tem certeza que quer sair da sua conta?')
 		if(decide){
 			const token = localStorage.removeItem('token')
-			history.push('/')
+			history('/')
 		}
 	}
 	
@@ -61,7 +61,7 @@ const GlobalState = (props) =>{
 		}
 
 		setMostrar(false)
-		history.push('/carrinho')
+		history('/carrinho')
 	}
 	
 
@@ -82,7 +82,7 @@ const GlobalState = (props) =>{
 						return cat.category
 					}))								
 					setIdRestaurante(id)
-					history.push('/cardapio')
+					history('/cardapio')
 				}).catch(err=>{
 					console.log(err.response)
 				})

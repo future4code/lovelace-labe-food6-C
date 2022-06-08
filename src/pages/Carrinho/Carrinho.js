@@ -67,22 +67,22 @@ console.log(valor)
 			<h3>Meu carrinho</h3>			
 			<hr/>			
 			<SectionOne>
-				<div><div class='informativo'>Endereço para entrega</div>
+				<div><div className='informativo'>Endereço para entrega</div>
 					{perfil.address}</div>
 			</SectionOne>
 			<SectionTwo>
-				<div class='restaurante'>{cardapio.name}</div>				
-				<div class='endereco'>{cardapio.address}</div>				
+				<div className='restaurante'>{cardapio.name}</div>				
+				<div className='endereco'>{cardapio.address}</div>				
 			</SectionTwo>
 			<hr/>
 			{sacola.length > 0 ? sacola.map(item=>{
 				return<CardPratos>
 						<Picture src={item.photoUrl}/>
-						<div class='sessao'>
-							<div class='nome'>{item.name}</div>
+						<div className='sessao'>
+							<div className='nome'>{item.name}</div>
 							<small>{item.description}</small>
 							<br/>Quantidade: {quantos(item.id)}
-							<div class='preco'>R$ {item.price},00</div>							
+							<div className='preco'>R$ {item.price},00</div>							
 						</div>
 					  </CardPratos>
 			}) : <h3 style={{textAlign:'center'}} >Seu carrinho está vazio</h3>}

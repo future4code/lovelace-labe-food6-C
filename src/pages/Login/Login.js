@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react'
 import {url} from '../../constants/urls'
 import axios from 'axios'
-import {useHistory, Link} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 import Logo from '../../img/logo-future-eats-invert.png'
 import OlhoAberto from '../../img/senha-2.png'
 import OlhoFechado from '../../img/senha.png'
@@ -10,7 +10,7 @@ import {Container, Image, Formulario, Titulo} from './styled'
 
 
 const Login = ()=>{
-	const history = useHistory()
+	const history = useNavigate()
 	const olho = useRef(null)
 	const senha = useRef(null)
 	const [form, setForm] = useState({email:'', senha:''})
@@ -19,7 +19,7 @@ const Login = ()=>{
 	useEffect(()=>{
 		const token = localStorage.getItem('token')
 		if(token !== null){
-			history.push('/feed')
+			history('/feed')
 		}
 	})
 
@@ -37,7 +37,7 @@ const Login = ()=>{
 
 		axios.post(`${url}/login`, body).then(res=>{
 			localStorage.setItem('token', res.data.token)
-			history.push('/feed')
+			history('/feed')
 		}).catch(err=>{
 			alert('Algo deu errado!\n'+err.response.data.message)
 		})
@@ -56,7 +56,7 @@ const Login = ()=>{
 
 //Início da renderização
 	return<Container>
-			<Image src={`${Logo}`} class="Logo_FutureEats_invert"/>
+			<Image src={`${Logo}`} className="Logo_FutureEats_invert"/>
 			<Titulo>Entrar</Titulo>
 			<Formulario onSubmit={login}>
 				<div >

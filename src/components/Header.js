@@ -1,7 +1,7 @@
 import React from 'react'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import styled from 'styled-components'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+// import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 
 
@@ -11,12 +11,12 @@ const Head = styled.header`
 
 
 const Header = ()=>{
-	const history = useHistory()
+	const history = useNavigate()
 
 	return<Head>
-				<ArrowBackIosIcon style={{marginLeft:'-85%',
+				{/* <ArrowBackIosIcon style={{marginLeft:'-85%',
 					padding:'5px'}}
-				onClick={()=> history.goBack()} />
+				onClick={()=> history(-1)} /> */}
 			</Head>
 }
 export default Header

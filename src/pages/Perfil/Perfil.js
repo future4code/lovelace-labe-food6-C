@@ -1,13 +1,13 @@
 import React, {useContext, useEffect, useRef, useState} from 'react'
 import Context from '../../global/Context'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios'
 import {url, headers} from '../../constants/urls'
-import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+// import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import {Container, Header, SectionOne, SectionTwo, BtnHide,
 BtnForm, Pedidos} from './styled'
-import EditIcon from '@material-ui/icons/Edit';
+// import EditIcon from '@material-ui/icons/Edit';
 import Footer from '../../components/Footer'
 
 
@@ -15,7 +15,7 @@ import Footer from '../../components/Footer'
 
 //----------Componente funcional--------------------
 const Perfil = ()=>{
-	const history = useHistory()
+	const history = useNavigate()
 	const {states, setters, requests} = useContext(Context)
 	const pedidos = states.pedidos
 	const perfil = states.perfil
@@ -80,21 +80,22 @@ const Perfil = ()=>{
 
 	return<Container>
 			<Header>
-			<h3>Meu perfil</h3><PersonOutlineIcon style={{fontSize:'2.5rem',
-			color:'lightgray'}} onClick={setters.logout} />
+			<h3>Meu perfil</h3>
+			{/* <PersonOutlineIcon style={{fontSize:'2.5rem',
+			color:'lightgray'}} onClick={setters.logout} /> */}
 			</Header>
 			<hr/>
 			<SectionOne>
 				<p>{perfil.name}<br/>
 				{perfil.email}<br/>
 				{perfil.cpf}</p>
-				<EditIcon onClick={edite}/>
+				{/* <EditIcon onClick={edite}/> */}
 			</SectionOne>
 			<SectionTwo>				
 				<span>
 				<div style={{color:'lightgray'}}>Endereço cadastrado</div>
 				{perfil.address}</span>
-				<EditIcon onClick={()=> history.push('/address')}/>
+				{/* <EditIcon onClick={()=> history('/address')}/> */}
 			</SectionTwo>			
 			<div ref={editar} style={{display:'none'}}>
 			<hr/><BtnHide onClick={ocultar} >Ocultar</BtnHide>
@@ -111,17 +112,17 @@ const Perfil = ()=>{
 			<p>Histórico de pedidos<hr/></p>
 			{pedidos.length > 0 ? pedidos.map(pedido=>{
 				return<Pedidos>
-						<div class='titulo'>
+						<div className='titulo'>
 							{pedido.restaurantName}
 						</div>
 						<p>Data: {dataDoPedido}<br/>
 							Expiração: {expiracao}</p>
-						<div class='total'>
+						<div className='total'>
 						SUBTOTAL: R$ {pedido.totalPrice}
 						</div>
 					  </Pedidos>
-			}) : <div class='loadContainer'>
-					<div class='loading'></div>
+			}) : <div className='loadContainer'>
+					<div className='loading'></div>
 					</div>}
 				<Footer/>
 		  </Container>
