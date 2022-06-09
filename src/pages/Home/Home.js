@@ -1,7 +1,8 @@
-import React from 'react'
+import React,{ useEffect } from 'react'
 import {useNavigate} from 'react-router-dom'
-import styled from 'styled-components'
 import Logo from '../../img/logo-future-eats.png'
+import { token } from '../../constants/urls'
+import styled from 'styled-components'
 
 
 
@@ -22,6 +23,13 @@ const Image = styled.img`
 
 const Home = ()=>{
 	const history = useNavigate()
+
+
+	useEffect(()=>{
+		if(token){
+			history('/feed')
+		}
+	}, [])
 
 	
 	return<Container>

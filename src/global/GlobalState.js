@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom'
 
 const GlobalState = (props) =>{
 	const history = useNavigate()
-	const container = useRef(null)
+	const popup = useRef(null)
 	const [mostrar, setMostrar] = useState(false)
 	const [idRestaurante, setIdRestaurante] = useState('')
 	const [idProduto, setIdProduto] = useState('')
@@ -28,12 +28,22 @@ const GlobalState = (props) =>{
 	}
 
 
-	const adicionar = (prato)=>{
-		const novaSacola = [...sacola, prato]
-		setSacola(novaSacola)
-		setMostrar(true)
+
+	const adicionar = (prato)=>{		
 		setIdProduto(prato.id)
+		popup.current.style.display = 'block'
 	}
+
+	// const adicionarAoCarro = (prato)=>{
+	// 	const novaSacola = [...sacola, prato]
+	// 	setSacola(novaSacola)
+	// }
+
+
+	const retiraPopup = ()=>{
+		popup.current.style.display = 'none'
+	}
+
 
 	const logout = ()=>{
 		const decide = window.confirm('Tem certeza que quer sair da sua conta?')
@@ -119,10 +129,11 @@ const GlobalState = (props) =>{
 	
 
 	const states = {restaurantes, cardapio, perfil, carro, produto, mostrar,
-		container, pedidos, endereco, categorias, idRestaurante, idProduto,
+		pedidos, endereco, categorias, idRestaurante, idProduto,
 		sacola}
 
-	const setters = {adicionarAoCarro, mudaProduto, adicionar, setMostrar, logout}
+	const setters = {adicionarAoCarro, mudaProduto, adicionar,
+		setMostrar, logout, popup, retiraPopup}
 
 	const requests = {listaDeRestaurantes, detalhesRest, pegarPerfil,
 		historicoDePedidos, enderecoCadastrado}

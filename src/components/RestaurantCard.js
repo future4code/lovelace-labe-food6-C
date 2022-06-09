@@ -4,9 +4,13 @@ import Context from '../global/Context'
 
 
 const Card = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	border: 1px solid red;
-	width: 83vw;
-	margin: 20px;
+	width: 50vw;
+	margin: auto;
+	margin-bottom: 40px;
 `
 const Texto = styled.div`
 	margin: 15px;
@@ -16,8 +20,9 @@ const Tempo = styled.div`
 	justify-content: space-between;
 `
 const Image = styled.img`
-	width: 310px;
-	height: 150px;
+	width: 50vw;
+	height: 50vh;
+	cursor: pointer;
 `
 
 const RestaurantCard = (props)=>{

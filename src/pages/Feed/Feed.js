@@ -4,9 +4,9 @@ import Context from '../../global/Context'
 import {Container, Categorias, Categoria,
 Restaurantes, SearchInput, Search, LogoPicture} from './styled'
 import RestaurantCard from '../../components/RestaurantCard'
-import Footer from '../../components/Footer'
-import Carrinho from '../Carrinho/Carrinho'
 import SearchIcon from '../../img/search.png'
+import Carrinho from '../../img/shopping-cart.png'
+import Avatar from '../../img/avatar.png'
 import Logo from '../../img/logo-future-eats-invert.png'
 
 
@@ -18,7 +18,6 @@ const Feed = ()=>{
 	const restaurantes = states.restaurantes
 	const [restaurante, setRestaurante] = useState('')
 	const [busca, setBusca] = useState([])
-console.log(busca)
 	
 
 
@@ -54,7 +53,7 @@ console.log(busca)
 	
 
 //---Início da renderização-----------------------------------
-	return<Container ref={states.container}>
+	return<Container ref={states.container}>			
 			<LogoPicture>
 				<img src={Logo}/>
 			</LogoPicture>
@@ -96,8 +95,7 @@ console.log(busca)
 					<div className='loading'>
 					</div>
 				 </div>}
-				 </Restaurantes>				 
-				 <Footer/>				 	
+				 </Restaurantes>				 				 	
 		  </Container>
 }
 export default Feed
